@@ -30,6 +30,7 @@
   .gallery {
     height: 100%;
     width: 900px;
+    position: relative;
   }
 
   .gallery img{
@@ -43,6 +44,18 @@
 
   .gallery img.active {
     display: block;
+  }
+
+  .gallery .text {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    text-align: right;
+    padding: 40px;
+  }
+
+  .gallery p {
+    padding-left: 120px;
   }
 
   .thumbnails {
