@@ -39,7 +39,7 @@
     object-fit: cover;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    display: none;
+    
   }
 
   .gallery img.active {
@@ -52,6 +52,7 @@
     color: white;
     text-align: right;
     padding: 40px;
+   
   }
 
   .gallery p {
@@ -83,4 +84,3 @@
   .thumbnails .fa-sharp:hover {
     color: white;
   }
-
