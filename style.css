@@ -132,7 +132,11 @@
     padding: 6px 10px;
     background-color: greenyellow;
     font-weight: bold;
-    border: transparent;
+    border: 3px solid transparent;
     cursor: pointer;
+  }
+
+  #autoplay-button:hover , #reverse-autoplay:hover {
+    border: 3px solid white;
   }
 
