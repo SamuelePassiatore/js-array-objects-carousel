@@ -119,3 +119,20 @@
   #carousel .fa-sharp:hover {
     color: dodgerblue;
   }
+
+  /* Autoplay */
+  .autoplay {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+
+  #autoplay-button, #reverse-autoplay {
+    margin-left: 10px;
+    padding: 6px 10px;
+    background-color: greenyellow;
+    font-weight: bold;
+    border: transparent;
+    cursor: pointer;
+  }
+

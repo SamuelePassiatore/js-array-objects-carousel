@@ -33,7 +33,8 @@ const source = [
 ];
 
 // ! FUNZIONI
-const changePic = (target) => {
+// Funzione cambio immagine
+const changePic = target => {
   
     // Rimuovo la classe active all'immagine corrente
     images[currentActiveIndex].classList.remove('active');
@@ -62,6 +63,23 @@ const changePic = (target) => {
     images[currentActiveIndex].classList.add('active');
     thumbs[currentActiveIndex].classList.add('active');
 }
+
+// Funzione start autoplay
+const startAutoplay = (direction) => {
+  autoplay = setInterval(()=>{
+    changePic(direction);
+  }, 3000);
+};
+
+// Funzione stop autoplay
+const stopAutoplay = (changeButton = true) => {
+  isPlaying = false;
+  clearInterval(autoplay);
+  
+  if(changeButton) {
+    autoplayButton.innerText = 'RESUME AUTOPLAY';
+  }
+};
 
 // ! OPERAZIONI PRELIMINARI
 // Recupero la galleria
@@ -103,14 +121,45 @@ thumbGallery.innerHTML = thumbsElements;
   // Recupero i bottoni
   const prevButton = document.getElementById('prev');
   const nextButton = document.getElementById('next');
+  const autoplayButton = document.getElementById('autoplay-button');
+  const reverseAutoplay = document.getElementById('reverse-autoplay');
 
+  // ! OPERAZIONI DI AVVIO PAGINA
+  // Avvio l'autoplay
+  let autoplay;
+  let direction = 'next';
+  startAutoplay(direction);
+
+  let isPlaying = true;
   // ! EVENTI DINAMICI
+  // Aggancio un evento al reverse autoplay
+  reverseAutoplay.addEventListener('click', () => {
+    // Stop autoplay
+    stopAutoplay(changeButton = false);
+    // Inverto la direzione
+    direction = direction === 'next' ? 'prev' : 'next';
+    // Faccio ripartire l'autoplay
+    startAutoplay(direction);
+  });
+  // Aggancio un evento al bottone autoplay
+  autoplayButton.addEventListener('click', () => {
+    isPlaying = !isPlaying;
+    if(!isPlaying){
+      autoplayButton.innerText = 'RESUME AUTOPLAY';
+      clearInterval(autoplay);
+    } else {
+      autoplayButton.innerText = 'STOP AUTOPLAY';
+      startAutoplay(direction);
+    }
+  });
   // Aggancio l'evento all'arrow next
   nextButton.addEventListener('click', () => {
+   stopAutoplay();
    changePic('next');
   });
   // Aggancio l'evento all'arrow prev
   prevButton.addEventListener('click', () => {
+    stopAutoplay();
     changePic('prev');
   });
   // Rendo cliccabili i thumbnails 
@@ -118,9 +167,10 @@ thumbGallery.innerHTML = thumbsElements;
     const thumb = thumbs[i];
     // Aggiungo il click al singolo thumbnails
     thumb.addEventListener('click', () => {
+      stopAutoplay();
       changePic(i);
     })
-  }
+  };
 
 
 
